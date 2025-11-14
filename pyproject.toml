@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "amazing-marvin-mcp"
+version = "2.0.0"
+description = "MCP server for Amazing Marvin task management - hosted on Smithery"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [
+    { name = "Luca De Leo" }
+]
+keywords = ["mcp", "amazing-marvin", "task-management", "productivity", "smithery"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "mcp>=1.15.0",
+    "smithery>=0.4.2",
+    "httpx>=0.27.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/LucaDeLeo/amazing-marvin-mcp"
+Repository = "https://github.com/LucaDeLeo/amazing-marvin-mcp"
+Documentation = "https://github.com/LucaDeLeo/amazing-marvin-mcp/blob/main/README.md"
+
+[tool.smithery]
+server = "amazing_marvin_mcp.server:create_server"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/amazing_marvin_mcp"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
