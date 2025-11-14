@@ -285,10 +285,10 @@ Legacy files (deprecated):
 **1. Server Creation with @smithery.server() Decorator**
 
 ```python
-from smithery import server as smithery_server
+from smithery.decorators import smithery
 from mcp.server.fastmcp import FastMCP, Context
 
-@smithery_server(config_schema=AmazingMarvinConfig)
+@smithery.server(config_schema=AmazingMarvinConfig)
 def create_server():
     """
     Entry point called by Smithery to create the MCP server.
@@ -356,8 +356,8 @@ async def _make_api_request(endpoint: str, ctx: Context, ...):
 
 | Aspect | STDIO (old) | Smithery (new) |
 |--------|-------------|----------------|
-| **Imports** | `from mcp.server.fastmcp import FastMCP` | `+ from smithery import server`<br>`+ from mcp.server.fastmcp import Context` |
-| **Server Init** | `mcp = FastMCP("...")` at module level | `@smithery_server()` wrapping `create_server()` function |
+| **Imports** | `from mcp.server.fastmcp import FastMCP` | `+ from smithery.decorators import smithery`<br>`+ from mcp.server.fastmcp import Context` |
+| **Server Init** | `mcp = FastMCP("...")` at module level | `@smithery.server()` wrapping `create_server()` function |
 | **API Token** | `os.getenv("AMAZING_MARVIN_API_TOKEN")` | `ctx.session_config.api_token` |
 | **Tool Signature** | `async def tool(params: Model) -> str` | `async def tool(params: Model, ctx: Context) -> str` |
 | **Entry Point** | `if __name__ == "__main__": mcp.run()` | `create_server()` function (NO main block) |
@@ -433,7 +433,7 @@ When adding new tools to the Smithery deployment:
 
 2. **Add Tool Inside create_server() Function**
    ```python
-   @smithery_server(config_schema=AmazingMarvinConfig)
+   @smithery.server(config_schema=AmazingMarvinConfig)
    def create_server():
        mcp = FastMCP("amazing_marvin_mcp")
 
