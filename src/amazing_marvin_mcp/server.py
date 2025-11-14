@@ -12,7 +12,7 @@ import json
 import httpx
 from pydantic import BaseModel, Field, field_validator, ConfigDict
 from mcp.server.fastmcp import FastMCP, Context
-from smithery import server as smithery_server
+from smithery.decorators import smithery
 
 # Constants
 API_BASE_URL = "https://serv.amazingmarvin.com/api"
@@ -369,7 +369,7 @@ class SimpleFormatInput(BaseTaskInput):
 # Server Creation Function with Smithery Decorator
 # ============================================================================
 
-@smithery_server(config_schema=AmazingMarvinConfig)
+@smithery.server(config_schema=AmazingMarvinConfig)
 def create_server():
     """
     Create and configure the Amazing Marvin MCP server.
